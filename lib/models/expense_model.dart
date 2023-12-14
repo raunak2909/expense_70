@@ -1,67 +1,48 @@
+
+
+import '../database/Appdatabase.dart';
+
 class ExpenseModel {
-  String date;
-  String amt;
-  List<ExpenseDetails> transaction;
-
-  ExpenseModel({
-    required this.date,
-    required this.amt,
-    required this.transaction,
-  });
-
-  // Convert ExpenseModel to Map
-  Map<String, dynamic> toMap() {
-    return {
-      'date': date,
-      'amt': amt,
-      'transaction': transaction.map((expenseDetails) => expenseDetails.toMap()).toList(),
-    };
-  }
-
-  // Reconstruct ExpenseModel from Map
-  factory ExpenseModel.fromMap(Map<String, dynamic> map) {
-    return ExpenseModel(
-      date: map['date'],
-      amt: map['amt'],
-      transaction: List<ExpenseDetails>.from(map['transaction'].map((x) => ExpenseDetails.fromMap(x))),
-    );
-  }
-}
-
-class ExpenseDetails {
+  int eId;
+  int catId;
+  int eType;
+  num amt;
+  num balance;
   String title;
   String desc;
-  String amt;
-  String balance;
-  String catImg;
+  String timeStamp;
 
-  ExpenseDetails({
-    required this.title,
-    required this.desc,
+  ExpenseModel({this.eId = 0,
+    required this.catId,
+    required this.eType,
     required this.amt,
     required this.balance,
-    required this.catImg,
-  });
+    required this.title,
+    required this.desc,
+    required this.timeStamp});
 
-  // Convert ExpenseDetails to Map
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'desc': desc,
-      'amt': amt,
-      'balance': balance,
-      'catImg': catImg,
-    };
+  factory ExpenseModel.fromMap(Map<String, dynamic> map){
+    return ExpenseModel(
+        eId: map[AppDataBase.COLUMN_ID],
+        catId: map[AppDataBase.COLUMN_EXPENSE_CAT_ID],
+        eType: map[AppDataBase.COLUMN_TYPE],
+        amt: map[AppDataBase.COLUMN_AMT],
+        balance: map[AppDataBase.COLUMN_BALANCE],
+        title: map[AppDataBase.COLUMN_TITLE],
+        desc: map[AppDataBase.COLUMN_DESC],
+        timeStamp: map[AppDataBase.COLUMN_TIMESTAMP],);
+
   }
 
-  // Reconstruct ExpenseDetails from Map
-  factory ExpenseDetails.fromMap(Map<String, dynamic> map) {
-    return ExpenseDetails(
-      title: map['title'],
-      desc: map['desc'],
-      amt: map['amt'],
-      balance: map['balance'],
-      catImg: map['catImg'],
-    );
+  Map<String, dynamic> toMap(){
+    return {
+      AppDataBase.COLUMN_EXPENSE_CAT_ID : catId,
+      AppDataBase.COLUMN_AMT : amt,
+      AppDataBase.COLUMN_BALANCE : balance,
+      AppDataBase.COLUMN_TITLE : title,
+      AppDataBase.COLUMN_DESC : desc,
+      AppDataBase.COLUMN_TIMESTAMP : timeStamp,
+      AppDataBase.COLUMN_TYPE : eType,
+    };
   }
 }

@@ -8,7 +8,7 @@ class Allexpense extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get the dummy data
-    var data = Appstatic.dummyExpense;
+    //var data = Appstatic.dummyExpense;
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
@@ -16,7 +16,22 @@ class Allexpense extends StatelessWidget {
         title: Text("Expense"),
         backgroundColor: Colors.teal,
       ),
-      body: Column(
+      body: Container(),
+      // Button to navigate to the AddExpense page
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddExpense()));
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+
+/*
+*
+* Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -64,14 +79,4 @@ class Allexpense extends StatelessWidget {
             ),
           ),
         ],
-      ),
-      // Button to navigate to the AddExpense page
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddExpense()));
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
+      ),*/

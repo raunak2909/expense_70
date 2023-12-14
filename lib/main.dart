@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ws_expance_app/pages/AddExpense.dart';
 import 'package:ws_expance_app/pages/AllExpense.dart';
 import 'package:ws_expance_app/pages/LoginScreen.dart';
 import 'package:ws_expance_app/pages/SplashScreen.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:SplashScreen(),
+      home:AddExpense(),
     );
   }
 }
