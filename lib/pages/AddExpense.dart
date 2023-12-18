@@ -7,7 +7,8 @@ import 'package:ws_expance_app/global/dummyexpanse.dart';
 import 'package:ws_expance_app/models/expense_model.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({Key? key}) : super(key: key);
+  double mBalance;
+  AddExpense({required this.mBalance});
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -40,13 +41,13 @@ class _AddExpenseState extends State<AddExpense> {
             children: [
               SizedBox(height: 20),
               Uihelper.CustomTextField(
-                  tcontroller, "Name your Expense", Icons.abc, true),
+                  tcontroller, "Name your Expense", Icons.abc, false),
               SizedBox(height: 10),
               Uihelper.CustomTextField(
-                  Desccontroller, "Add Desc", Icons.abc, true),
+                  Desccontroller, "Add Desc", Icons.abc, false),
               SizedBox(height: 10),
               Uihelper.CustomTextField(
-                  amtcontroller, "Enter amount", Icons.money, true),
+                  amtcontroller, "Enter amount", Icons.money, false),
               SizedBox(height: 10),
               DropdownButton(
                 value: selectedTransactionType,
@@ -138,16 +139,25 @@ class _AddExpenseState extends State<AddExpense> {
                 var desc = Desccontroller.text.toString();
                 var amt = amtcontroller.text.toString();
 
+                var balance = widget.mBalance;
+                if(selectedTransactionType=="Credit"){
+                  balance += double.parse(amt);
+                } else {
+                  balance -= double.parse(amt);
+                }
+
                 var newExpense = ExpenseModel(
-                    catId: 0,
+                    catId: selectedCatIndex,
                     eType: selectedTransactionType=="Credit" ? 0 : 1,
                     amt: double.parse(amt),
-                    balance: 0,
+                    balance: balance,
                     title: title,
                     desc: desc,
                     timeStamp: selectedDate.millisecondsSinceEpoch.toString());
 
                 BlocProvider.of<ExpenseBloc>(context).add(AddExpenseEvent(newExpense: newExpense));
+
+                Navigator.pop(context);
 
 
               }, child: Text("ADD Expanse"),

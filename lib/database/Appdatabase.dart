@@ -48,7 +48,7 @@ class AppDataBase {
       //create your tables here..
 
       db.execute(
-          "Create Table $TABLE_NAME ($COLUMN_ID integer primary key autoincrement, $COLUMN_TITLE text not null, $COLUMN_DESC text not null, $COLUMN_TYPE integer, $COLUMN_EXPENSE_CAT_ID integer, $COLUMN_AMT num, $COLUMN_BALANCE num, $COLUMN_TIMESTAMP text)");
+          "Create Table $TABLE_NAME ($COLUMN_ID integer primary key autoincrement, $COLUMN_TITLE text not null, $COLUMN_DESC text not null, $COLUMN_TYPE integer, $COLUMN_EXPENSE_CAT_ID integer, $COLUMN_AMT real, $COLUMN_BALANCE real, $COLUMN_TIMESTAMP text)");
 
       db.execute(
           "Create Table $TABLE_CAT_NAME ($COLUMN_CAT_ID integer primary key autoincrement, $COLUMN_CAT_TITLE text not null, $COLUMN_CAT_IMG_PATH text not null)");
